@@ -103,6 +103,9 @@ class Contest(commands.Cog):
                 embed = self.create_embed(contest)
                 await notice_channel.send(embed=embed)
         made = []
+        threads = await contest_channel.threads
+        for thread in threads:
+            made.append(thread.name)
         for contest in data:
             if (
                 contest.Status == "Upcoming"
@@ -115,14 +118,15 @@ class Contest(commands.Cog):
                             embed = self.create_embed(contest)
                             await thread.send(embed=embed)
                             break
-                made.append(contest.Name)
-                thread = await contest_channel.create_thread(
-                    name=contest.Name,
-                    auto_archive_duration=1440,
-                    type=discord.ChannelType.public_thread,
-                )
-                embed = self.create_embed(contest)
-                await thread.send(embed=embed)
+                else:
+                    made.append(contest.Name)
+                    thread = await contest_channel.create_thread(
+                        name=contest.Name,
+                        auto_archive_duration=1440,
+                        type=discord.ChannelType.public_thread,
+                    )
+                    embed = self.create_embed(contest)
+                    await thread.send(embed=embed)
 
     @tasks.loop(seconds=10)
     async def thread_batch(self):
