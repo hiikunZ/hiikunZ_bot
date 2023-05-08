@@ -103,7 +103,7 @@ class Contest(commands.Cog):
                 embed = self.create_embed(contest)
                 await notice_channel.send(embed=embed)
         made = []
-        threads = await contest_channel.threads
+        threads = contest_channel.threads
         for thread in threads:
             made.append(thread.name)
         for contest in data:
@@ -112,7 +112,7 @@ class Contest(commands.Cog):
                 and contest.Starttime - now <= datetime.timedelta(days=1)
             ):
                 if contest.Name in made:
-                    threads = await contest_channel.threads
+                    threads = contest_channel.threads
                     for thread in threads:
                         if thread.name == contest.Name:
                             embed = self.create_embed(contest)
@@ -152,15 +152,18 @@ class Contest(commands.Cog):
         data.extend(yukicoder.get_contest_data())
         data.extend(codechef.get_contest_data())
         data.sort(key=lambda x: x.Starttime)
+        send = []
         for contest in data:
             if contest.Status == "Upcoming":
                 if contest.Starttime - now == datetime.timedelta(minutes=120):
                     for thread in threads:
                         if thread.name == contest.Name:
                             embed = self.create_embed(contest)
-                            await thread.send(
-                                "2 hours left " + mentions[contest.Platform]
-                            )
+                            if not contest.Name in send:
+                                await thread.send(
+                                    "2 hours left " + mentions[contest.Platform]
+                                )
+                                send.append(contest.Name)
                             await thread.send(embed=embed)
                             if "(" in contest.Name or "（" in contest.Name:
                                 await thread.send(
@@ -171,9 +174,11 @@ class Contest(commands.Cog):
                     for thread in threads:
                         if thread.name == contest.Name:
                             embed = self.create_embed(contest)
-                            await thread.send(
-                                "1 hour left " + mentions[contest.Platform]
-                            )
+                            if not contest.Name in send:
+                                await thread.send(
+                                    "1 hour left " + mentions[contest.Platform]
+                                )
+                                send.append(contest.Name)
                             await thread.send(embed=embed)
                             if "(" in contest.Name or "（" in contest.Name:
                                 await thread.send(
@@ -184,9 +189,11 @@ class Contest(commands.Cog):
                     for thread in threads:
                         if thread.name == contest.Name:
                             embed = self.create_embed(contest)
-                            await thread.send(
-                                "30 minutes left " + mentions[contest.Platform]
-                            )
+                            if not contest.Name in send:
+                                await thread.send(
+                                    "30 minutes left " + mentions[contest.Platform]
+                                )
+                                send.append(contest.Name)
                             await thread.send(embed=embed)
                             if "(" in contest.Name or "（" in contest.Name:
                                 await thread.send(
@@ -197,9 +204,11 @@ class Contest(commands.Cog):
                     for thread in threads:
                         if thread.name == contest.Name:
                             embed = self.create_embed(contest)
-                            await thread.send(
-                                "10 minutes left " + mentions[contest.Platform]
-                            )
+                            if not contest.Name in send:
+                                await thread.send(
+                                    "10 minutes left " + mentions[contest.Platform]
+                                )
+                                send.append(contest.Name)
                             await thread.send(embed=embed)
                             if "(" in contest.Name or "（" in contest.Name:
                                 await thread.send(
