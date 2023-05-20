@@ -59,13 +59,12 @@ class Contest(commands.Cog):
         timeinfo += " (" + str(data.Duration)[:-3] + ")"
         if data.Status == "Running":
             timeinfo += "\nTime remaining : " + str(data.Endtime - now)[:-3]
+        otherinfo = "rated : " + data.RatedRange + "\n[standings](" + data.StandingsUrl + ")"
+        if data.ProblemAUrl is not None:
+            otherinfo += " [problem_A](" + data.ProblemAUrl + ")"
         embed.add_field(
             name=timeinfo,
-            value="rated : "
-            + data.RatedRange
-            + "\n[standings]("
-            + data.StandingsUrl
-            + ")",
+            value=otherinfo
         )
         return embed
 

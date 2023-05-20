@@ -5,6 +5,7 @@ class ContestData:
     Name = None
     Url = None
     StandingsUrl = None
+    ProblemAUrl = None
     Type = None
     Color = None
     Status = None

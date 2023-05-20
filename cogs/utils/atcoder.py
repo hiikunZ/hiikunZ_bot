@@ -22,6 +22,7 @@ def get_contest_data():
                 data[0].text, "%Y-%m-%d %H:%M:%S"
             )
             contest_data.Url = "https://atcoder.jp" + data[1].find("a").get("href")
+            contest_data.ProblemAUrl = contest_data.Url + "/tasks/" + data[1].find("a").get("href").split("/")[-1] + "_a"
             contest_data.StandingsUrl = contest_data.Url + "/standings"
             contest_data.Name = data[1].find("a").text
             contesttype = data[1].find_all("span")[0].get("title")
@@ -75,6 +76,7 @@ def get_contest_data():
                 data[0].text, "%Y-%m-%d %H:%M:%S"
             )
             contest_data.Url = "https://atcoder.jp" + data[1].find("a").get("href")
+            contest_data.ProblemAUrl = contest_data.Url + "/tasks/" + data[1].find("a").get("href").split("/")[-1] + "_a"
             contest_data.StandingsUrl = contest_data.Url + "/standings"
             contest_data.Name = data[1].find("a").text
             contesttype = data[1].find_all("span")[0].get("title")
