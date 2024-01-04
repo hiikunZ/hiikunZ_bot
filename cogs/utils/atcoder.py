@@ -19,7 +19,7 @@ def get_contest_data():
             contest_data.Platform = "AtCoder"
             contest_data.Platformimage = "https://i.imgur.com/Rhv0H2m.png"
             contest_data.Starttime = datetime.strptime(
-                data[0].text, "%Y-%m-%d %H:%M:%S"
+                data[0].text, "%Y-%m-%d %H:%M:%S%z"
             )
             contest_data.Url = "https://atcoder.jp" + data[1].find("a").get("href")
             contest_data.ProblemAUrl = contest_data.Url + "/tasks/" + data[1].find("a").get("href").split("/")[-1] + "_a"
@@ -73,7 +73,7 @@ def get_contest_data():
             contest_data.Platform = "AtCoder"
             contest_data.Platformimage = "https://i.imgur.com/Rhv0H2m.png"
             contest_data.Starttime = datetime.strptime(
-                data[0].text, "%Y-%m-%d %H:%M:%S"
+                data[0].text, "%Y-%m-%d %H:%M:%S%z"
             )
             contest_data.Url = "https://atcoder.jp" + data[1].find("a").get("href")
             contest_data.ProblemAUrl = contest_data.Url + "/tasks/" + data[1].find("a").get("href").split("/")[-1] + "_a"
@@ -126,7 +126,7 @@ def get_contest_data():
             contest_data.Platform = "AtCoder"
             contest_data.Platformimage = "https://i.imgur.com/Rhv0H2m.png"
             contest_data.Starttime = datetime.strptime(
-                data[0].text, "%Y-%m-%d %H:%M:%S"
+                data[0].text, "%Y-%m-%d %H:%M:%S%z"
             )
             contest_data.Url = "https://atcoder.jp" + data[1].find("a").get("href")
             contest_data.StandingsUrl = contest_data.Url + "/standings"
