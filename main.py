@@ -32,6 +32,6 @@ async def main():
         await bot.start(os.environ["DISCORD_BOT_TOKEN"])
 
 
-# keep_alive()
+keep_alive()
 
 asyncio.run(main())
