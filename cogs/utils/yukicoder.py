@@ -21,8 +21,8 @@ def get_contest_data():
             contest_data.Status = "Running"
             contest_data.Platform = "yukicoder"
             contest_data.Platformimage = "https://i.imgur.com/jnamIn1.png"
-            start = re.sub("\(.\)", "", data[1].text.split("〜")[0]).strip()
-            end = re.sub("\(.\)", "", data[1].text.split("〜")[1]).rstrip()
+            start = re.sub("\(.\)", "", data[2].text.split("〜")[0]).strip()
+            end = re.sub("\(.\)", "", data[2].text.split("〜")[1]).rstrip()
             contest_data.Starttime = datetime.strptime(
                 start + "+0900", "%Y-%m-%d  %H:%M:%S%z"
             )
@@ -30,7 +30,7 @@ def get_contest_data():
                 end + "+0900", "%Y-%m-%d  %H:%M:%S%z"
             )
             contest_data.Url = "https://yukicoder.me" + data[0].find("a").get("href")
-            contest_data.StandingsUrl = "https://yukicoder.me" + data[4].find("a").get(
+            contest_data.StandingsUrl = "https://yukicoder.me" + data[5].find("a").get(
                 "href"
             )
             contest_data.Name = data[0].find("a").text
@@ -48,8 +48,8 @@ def get_contest_data():
             contest_data.Status = "Upcoming"
             contest_data.Platform = "yukicoder"
             contest_data.Platformimage = "https://i.imgur.com/jnamIn1.png"
-            start = re.sub("\(.\)", "", data[1].text.split("〜")[0]).strip()
-            end = re.sub("\(.\)", "", data[1].text.split("〜")[1]).rstrip()
+            start = re.sub("\(.\)", "", data[2].text.split("〜")[0]).strip()
+            end = re.sub("\(.\)", "", data[2].text.split("〜")[1]).rstrip()
             contest_data.Starttime = datetime.strptime(
                 start + "+0900", "%Y-%m-%d  %H:%M:%S%z"
             )
@@ -57,7 +57,7 @@ def get_contest_data():
                 end + "+0900", "%Y-%m-%d  %H:%M:%S%z"
             )
             contest_data.Url = "https://yukicoder.me" + data[0].find("a").get("href")
-            contest_data.StandingsUrl = "https://yukicoder.me" + data[4].find("a").get(
+            contest_data.StandingsUrl = "https://yukicoder.me" + data[5].find("a").get(
                 "href"
             )
             contest_data.Name = data[0].find("a").text
@@ -79,8 +79,8 @@ def get_contest_data():
             contest_data.Status = "Finished"
             contest_data.Platform = "yukicoder"
             contest_data.Platformimage = "https://i.imgur.com/jnamIn1.png"
-            start = re.sub("\(.\)", "", data[1].text.split("〜")[0]).strip()
-            end = re.sub("\(.\)", "", data[1].text.split("〜")[1]).rstrip()
+            start = re.sub("\(.\)", "", data[2].text.split("〜")[0]).strip()
+            end = re.sub("\(.\)", "", data[2].text.split("〜")[1]).rstrip()
             contest_data.Starttime = datetime.strptime(
                 start + "+0900", "%Y-%m-%d  %H:%M:%S%z"
             )
@@ -88,7 +88,7 @@ def get_contest_data():
                 end + "+0900", "%Y-%m-%d  %H:%M:%S%z"
             )
             contest_data.Url = "https://yukicoder.me" + data[0].find("a").get("href")
-            contest_data.StandingsUrl = "https://yukicoder.me" + data[4].find("a").get(
+            contest_data.StandingsUrl = "https://yukicoder.me" + data[5].find("a").get(
                 "href"
             )
             contest_data.Name = data[0].find("a").text
