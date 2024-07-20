@@ -10,7 +10,7 @@ def get_contest_data():
     load_url = (
         "https://www.codechef.com/api/list/contests/all?sort_by=START&sorting_order=asc"
     )
-    contest_list = requests.get(load_url).json()
+    contest_list = requests.get(load_url, headers={"User-Agent": "Bot"}).json()
     action = contest_list["present_contests"]
     for data in action:
         contest_data = ContestData()
