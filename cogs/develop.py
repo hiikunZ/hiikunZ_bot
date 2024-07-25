@@ -27,7 +27,7 @@ class Develop(commands.Cog):
     @commands.Cog.listener()
     async def on_member_join(self, member):
         greeting_channel = self.bot.get_channel(int(os.environ["GREETING_CHANNEL_ID"]))
-        await greeting_channel.send("こんにちは？新人さんですね？よろしくお願いします。")
+        await greeting_channel.send("こんにちは！新人さんですね？よろしくお願いします。")
 
     @commands.hybrid_command()
     async def ping(self, ctx):
