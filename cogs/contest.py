@@ -9,6 +9,7 @@ import cogs.utils.atcoder as atcoder
 import cogs.utils.codeforces as codeforces
 import cogs.utils.yukicoder as yukicoder
 import cogs.utils.codechef as codechef
+import cogs.utils.alpacahack as alpacahack
 
 JST = datetime.timezone(datetime.timedelta(hours=+9), "JST")
 time = datetime.time(hour=6, minute=0, tzinfo=JST)
@@ -18,6 +19,7 @@ mentions = {
     "Codeforces": "<@&" + os.environ["CODEFORCES_ROLE_ID"] + ">",
     "yukicoder": "<@&" + os.environ["YUKICODER_ROLE_ID"] + ">",
     "CodeChef": "<@&" + os.environ["CODECHEF_ROLE_ID"] + ">",
+    "AlpacaHack": "<@&" + os.environ["ALPACAHACK_ROLE_ID"] + ">",
 }
 
 
@@ -59,13 +61,12 @@ class Contest(commands.Cog):
         timeinfo += " (" + str(data.Duration)[:-3] + ")"
         if data.Status == "Running":
             timeinfo += "\nTime remaining : " + str(data.Endtime - now)[:-3]
-        otherinfo = "rated : " + data.RatedRange + "\n[standings](" + data.StandingsUrl + ")"
+        otherinfo = (
+            "rated : " + data.RatedRange + "\n[standings](" + data.StandingsUrl + ")"
+        )
         if data.ProblemAUrl is not None:
             otherinfo += " [problem_A](" + data.ProblemAUrl + ")"
-        embed.add_field(
-            name=timeinfo,
-            value=otherinfo
-        )
+        embed.add_field(name=timeinfo, value=otherinfo)
         return embed
 
     @tasks.loop(time=time)
@@ -86,6 +87,7 @@ class Contest(commands.Cog):
         data.extend(codeforces.get_contest_data())
         data.extend(yukicoder.get_contest_data())
         data.extend(codechef.get_contest_data())
+        data.extend(alpacahack.get_contest_data())
         data.sort(key=lambda x: x.Starttime)
         await notice_channel.send("Running contests")
         ok = False
@@ -150,6 +152,7 @@ class Contest(commands.Cog):
         data.extend(codeforces.get_contest_data())
         data.extend(yukicoder.get_contest_data())
         data.extend(codechef.get_contest_data())
+        data.extend(alpacahack.get_contest_data())
         data.sort(key=lambda x: x.Starttime)
         send = []
         for contest in data:
@@ -231,6 +234,7 @@ class Contest(commands.Cog):
         data.extend(codeforces.get_contest_data())
         data.extend(yukicoder.get_contest_data())
         data.extend(codechef.get_contest_data())
+        data.extend(alpacahack.get_contest_data())
         data.sort(key=lambda x: x.Starttime)
         ok = False
         for contest in data:
@@ -309,6 +313,26 @@ class Contest(commands.Cog):
     @commands.hybrid_command()
     async def codechef(self, ctx):
         "CodeChefのコンテスト情報を表示します。"
+        await ctx.send("Running contests")
+        data = codechef.get_contest_data()
+        data.sort(key=lambda x: x.Starttime)
+        ok = False
+        for contest in data:
+            if contest.Status == "Running":
+                embed = self.create_embed(contest)
+                await ctx.channel.send(embed=embed)
+                ok = True
+        if not ok:
+            await ctx.channel.send("=== There is no running contests ===")
+        await ctx.channel.send("Upcoming contests")
+        for contest in data:
+            if contest.Status == "Upcoming":
+                embed = self.create_embed(contest)
+                await ctx.channel.send(embed=embed)
+
+    @commands.hybrid_command()
+    async def alpacahack(self, ctx):
+        "AlpacaHackのコンテスト情報を表示します。"
         await ctx.send("Running contests")
         data = codechef.get_contest_data()
         data.sort(key=lambda x: x.Starttime)
