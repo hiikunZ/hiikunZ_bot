@@ -334,7 +334,7 @@ class Contest(commands.Cog):
     async def alpacahack(self, ctx):
         "AlpacaHackのコンテスト情報を表示します。"
         await ctx.send("Running contests")
-        data = codechef.get_contest_data()
+        data = alpacahack.get_contest_data()
         data.sort(key=lambda x: x.Starttime)
         ok = False
         for contest in data:
