@@ -87,7 +87,7 @@ class Contest(commands.Cog):
         data.extend(codeforces.get_contest_data())
         data.extend(yukicoder.get_contest_data())
         data.extend(codechef.get_contest_data())
-        data.extend(alpacahack.get_contest_data())
+        # data.extend(alpacahack.get_contest_data())
         data.sort(key=lambda x: x.Starttime)
         await notice_channel.send("Running contests")
         ok = False
@@ -152,7 +152,7 @@ class Contest(commands.Cog):
         data.extend(codeforces.get_contest_data())
         data.extend(yukicoder.get_contest_data())
         data.extend(codechef.get_contest_data())
-        data.extend(alpacahack.get_contest_data())
+        # data.extend(alpacahack.get_contest_data())
         data.sort(key=lambda x: x.Starttime)
         send = []
         for contest in data:
@@ -234,7 +234,7 @@ class Contest(commands.Cog):
         data.extend(codeforces.get_contest_data())
         data.extend(yukicoder.get_contest_data())
         data.extend(codechef.get_contest_data())
-        data.extend(alpacahack.get_contest_data())
+        # data.extend(alpacahack.get_contest_data())
         data.sort(key=lambda x: x.Starttime)
         ok = False
         for contest in data:
